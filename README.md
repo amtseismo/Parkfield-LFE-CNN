@@ -13,3 +13,8 @@ BibTeX:
         author={Thomas, AM and Inbal, Asaf, and Searcy, Jacob and Shelly, David R and B{\"u}rgmann, R},
         journal={Geophysical Research Letters},
     }
+	
+## Requirements
+
+In order to run the software you will need both [Obspy](https://docs.obspy.org/)(I have version 1.2.2) and [Tensorflow](https://www.tensorflow.org/)(I have version 1.14.0).  I recommend creating a [conda](https://docs.conda.io/en/latest/) environment and installing both packages into it.    
+
