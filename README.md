@@ -4,9 +4,6 @@
 
 This repository contains many variations of a Convolutional Neural Network trained to detect low-frequency earthquakes on the San Andreas fault.  The full descrition of the model, training data, and performance can be found in.
 
--------------
-## Reference
-
 Thomas, A. M., A. Inbal, J. Searcy, D. R. Shelly, and R. Burgmann (202?) Identification of low-frequency earthquakes on the San Andreas fault with deep learning. Submitted to Geophysical Research Letters.
 
 BibTeX:
