@@ -75,7 +75,7 @@ for jj, sta in enumerate(['THIS','40','B079']): #,'B901']):
     ax0.text(srange[0]+4,1.5,label[int(2*jj)],fontsize=28,fontweight='bold')
     
     # Create a Rectangle patch
-    rect = patches.Rectangle((24820,-2.1), 15, 4.2, linewidth=2, edgecolor='k', facecolor='none')
+    rect = patches.Rectangle((24825,-2.1), 8, 4.2, linewidth=2, edgecolor='k', facecolor='none')
     
     # Add the patch to the Axes
     ax0.add_patch(rect)
