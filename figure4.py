@@ -97,6 +97,13 @@ for jj, sta in enumerate(['THIS','40','B079']): #,'B901']):
     ax2.set_ylim((-2.1,2.1))
     ax2.set_yticks([])
 
+    if jj==2:
+        ax2.yaxis.set_major_locator(plt.NullLocator())
+        ax2.set_xlabel("Second of day on Aug. 5 2018",fontsize=14,labelpad=15)
+    ax2.tick_params(axis="x", labelsize=12)
+    ax2.text(sranges[0]+0.5,1.5,label[int(2*jj)+1],fontsize=28,fontweight='bold')
+    ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+
 ax0.set_xlabel("Second of day on Aug. 5 2018",fontsize=14,labelpad=15)
 cbaxes = fig.add_axes([0.675, 0.06, 0.2, 0.02]) 
 cb = plt.colorbar(cx1, cax = cbaxes, orientation="horizontal")
