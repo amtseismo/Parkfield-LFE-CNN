@@ -14,6 +14,8 @@ BibTeX:
         journal={Geophysical Research Letters},
     }
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4777132.svg)](https://doi.org/10.5281/zenodo.4777132)
+
 ## Requirements
 
 In order to run the scripts you will need both [Obspy](https://docs.obspy.org/) (I have version 1.2.2) and [Tensorflow](https://www.tensorflow.org/) (I have version 1.14.0).  I recommend creating a [conda](https://docs.conda.io/en/latest/) environment and installing both packages into it.    
