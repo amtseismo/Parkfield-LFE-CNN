@@ -12,8 +12,8 @@ BibTeX:
         title={Identification of low-frequency earthquakes on the San Andreas fault with deep learning},
         author={Thomas, Amanda M and Inbal, Asaf, and Searcy, Jacob and Shelly, David R and B{\"u}rgmann, R},
         journal={Geophysical Research Letters},
-		pages={e2021GL093157},
-		publisher={Wiley Online Library}
+	pages={e2021GL093157},
+	publisher={Wiley Online Library}
     }
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4777132.svg)](https://doi.org/10.5281/zenodo.4777132)
