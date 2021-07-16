@@ -8,13 +8,13 @@ Thomas, A. M., A. Inbal, J. Searcy, D. R. Shelly, and R. Burgmann (2021) Identif
 
 BibTeX:
 
-@article{thomasidentification,
-  title={Identification of low-frequency earthquakes on the San Andreas fault with deep learning},
-  author={Thomas, AM and Inbal, A and Searcy, J and Shelly, DR and B{\"u}rgmann, R},
-  journal={Geophysical Research Letters},
-  pages={e2021GL093157},
-  publisher={Wiley Online Library}
-}
+    @article{thomas2021lfe,
+        title={Identification of low-frequency earthquakes on the San Andreas fault with deep learning},
+        author={Thomas, Amanda M and Inbal, Asaf, and Searcy, Jacob and Shelly, David R and B{\"u}rgmann, R},
+        journal={Geophysical Research Letters},
+		pages={e2021GL093157},
+		publisher={Wiley Online Library}
+    }
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4777132.svg)](https://doi.org/10.5281/zenodo.4777132)
 
