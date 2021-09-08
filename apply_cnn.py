@@ -16,6 +16,31 @@ from scipy.signal import find_peaks
 import pickle
 import datetime
 
+def ZEN2inp(Z,E,N,epsilon):
+    '''
+    Apply feature normalizations to raw timeseries and convert
+    to CNN input format
+
+    Parameters:
+        Z (float array): The vertical component data.
+        E (float array): The east component data.
+        N (float array): The north component data.
+        epsilon (float): constant value added to input data to avoid zeros.
+
+    Returns:
+        data_inp (float array): CNN input
+    '''
+    data_Z_sign = np.sign(Z)
+    data_E_sign = np.sign(E)
+    data_N_sign = np.sign(N)
+    data_Z_val = np.log(np.abs(Z)+epsilon)
+    data_E_val = np.log(np.abs(E)+epsilon)
+    data_N_val = np.log(np.abs(N)+epsilon)
+    data_inp = np.hstack([data_Z_val.reshape(-1,1),data_Z_sign.reshape(-1,1),
+                          data_E_val.reshape(-1,1),data_E_sign.reshape(-1,1),
+                          data_N_val.reshape(-1,1),data_N_sign.reshape(-1,1),])
+    return data_inp
+
 # SET THESE PARAMETERS HOW YOU WISH
 thresh=0.1 # minimum decision threshold to log detections
 shift=15 # time window step size in seconds
@@ -70,7 +95,7 @@ for sta in ['B079','40','THIS']:
     st.detrend(type='simple')
     st.filter("highpass", freq=1.0, zerophase=True)
     
-    # ENFORCE COMPONENTS HAVE SAME START AND END TIME
+    # ENFORCE COMPONENTS TO HAVE SAME START AND END TIME
     start=st[0].stats.starttime
     finish=st[0].stats.endtime
     for ii in range(1,len(st)):
@@ -88,32 +113,23 @@ for sta in ['B079','40','THIS']:
     # APPLY CNN TO DATA
     nn=(len(st[0].data)-nwin)//nshift # number of windows
     sdects=[] # intialize detection structure
-    codestart=datetime.datetime.now()
-    for ii in range(nn+1): # loop through windows
+    sav_data = []
+    codestart=datetime.datetime.now() # start timer
+
+    for ii in range(nn+1):
+        # print(ii)
         data0s=lfe_unet_tools.simple_detrend(st[0].data[ii*nshift:ii*nshift+nwin])
         data1s=lfe_unet_tools.simple_detrend(st[1].data[ii*nshift:ii*nshift+nwin])
         data2s=lfe_unet_tools.simple_detrend(st[2].data[ii*nshift:ii*nshift+nwin])
         snip=np.concatenate((data0s,data1s,data2s))
-        sign=np.sign(snip)
-        val=np.log(np.abs(snip)+epsilon)
-        cnninput=np.hstack( [val[:1500].reshape(-1,1), sign[:1500].reshape(-1,1), val[1500:3000].reshape(-1,1), sign[1500:3000].reshape(-1,1), val[3000:].reshape(-1,1), sign[3000:].reshape(-1,1)] )
-        cnninput=cnninput[np.newaxis,:,:]
-        # make s predictions
-        stmp=model.predict(cnninput)
-        stmp=stmp.ravel()
-        spk=find_peaks(stmp, height=thresh, distance=200)    
-        if plots:
-            fig, ax = plt.subplots(4,1,figsize=(8,12))
-            nl=len(snip)//3
-            for jj in range(3):
-                ax[jj].plot(snip[jj*nl:(jj+1)*nl])
-            ax[3].plot(stmp,color=(0.25,0.25,0.25))
-            for jj in range(len(spk[0])):
-                ax[3].axvline(spk[0][jj],color='b') 
-            ax[3].set_ylim((0,1))
-        if len(spk[0]>0):     
-            for kk in range(len(spk[0])):
-                sdects.append([(spk[0][kk]+ii*nshift)/sr, spk[1]['peak_heights'][kk]])
+        data_inp=ZEN2inp(data0s,data1s,data2s,epsilon)
+        sav_data.append(data_inp)  # run model prediction in batch
+    sav_data = np.array(sav_data)
+    # make s predictions
+    stmp=model.predict(sav_data)
+    stmp=stmp.ravel()
+    spk=find_peaks(stmp, height=thresh, distance=200)    
+    sdects=np.hstack((spk[0].reshape(-1,1)/sr,spk[1]['peak_heights'].reshape(-1,1)))
     codestop=datetime.datetime.now()
     
     # SAVE DETECTION FILES
