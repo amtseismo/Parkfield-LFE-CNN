@@ -55,8 +55,8 @@ epsilon=1e-6
 
 # LOAD THE DATA
 print("LOADING DATA")
-n_data = h5py.File('parkfield_noise_data_1000.h5', 'r')
-x_data = h5py.File('parkfield_lfe_data_1000.h5', 'r')
+n_data = h5py.File('parkfield_noise_data_500.h5', 'r')
+x_data = h5py.File('parkfield_lfe_data_500.h5', 'r')
 model_save_file="large_"+str(large)+"_unet_lfe_std_"+str(std)+".tf"  
         
 if drop:
