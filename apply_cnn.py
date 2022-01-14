@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+s#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Oct 30 20:08:45 2020
@@ -79,17 +79,17 @@ for sta in ['B079','40','THIS']:
     print(sta+' '+str(day))
     st=Stream()
     if sta=='40':
-        st=read("/Users/amt/Documents/parkfield_nodal_deployment/data/1B.40..DPZ.2018-08-0"+str(day)+"-00-00-00.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/1B.40..DP1.2018-08-0"+str(day)+"-00-00-00.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/1B.40..DP2.2018-08-0"+str(day)+"-00-00-00.ms")
+        st=read("1B.40..DPZ.2018-08-0"+str(day)+"-00-00-00.ms")
+        st+=read("1B.40..DP1.2018-08-0"+str(day)+"-00-00-00.ms")
+        st+=read("1B.40..DP2.2018-08-0"+str(day)+"-00-00-00.ms")
     elif sta=="THIS":
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".BK."+sta+".HHZ.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".BK."+sta+".HHE.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".BK."+sta+".HHN.ms")
+        st+=read("2018-08-0"+str(day)+".BK."+sta+".HHZ.ms")
+        st+=read("2018-08-0"+str(day)+".BK."+sta+".HHE.ms")
+        st+=read("2018-08-0"+str(day)+".BK."+sta+".HHN.ms")
     elif sta=="B079":
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".PB."+sta+".EHZ.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".PB."+sta+".EH1.ms")
-        st+=read("/Users/amt/Documents/parkfield_nodal_deployment/data/2018-08-0"+str(day)+".PB."+sta+".EH2.ms")    
+        st+=read("2018-08-0"+str(day)+".PB."+sta+".EHZ.ms")
+        st+=read("2018-08-0"+str(day)+".PB."+sta+".EH1.ms")
+        st+=read("2018-08-0"+str(day)+".PB."+sta+".EH2.ms")    
     
     # PROCESS DATA
     st.detrend(type='simple')
